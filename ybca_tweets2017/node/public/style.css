@@ -1,0 +1,9 @@
+body {
+	background-color: black;
+}
+
+#msg {
+	font-size: 30px;
+	color : white;
+	margin-top: 50px;
+}
