@@ -1,4 +1,5 @@
+*node_modules/*
 .ipynb_checkpoints
 data/
 video/*
-node_modules
+*node_modules*
