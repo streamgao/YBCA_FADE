@@ -1,64 +1,42 @@
 /*
 this file led effect:
-fade r
-fade g
-fade b 
-fade white
+corss fade
 */
 
-
-#define D0 16
-#define D1 5 // I2C Bus SCL (clock)
-#define D2 4 // I2C Bus SDA (data)
-#define D3 0
-#define D4 2 // Same as "LED_BUILTIN", but inverted logic
-#define D5 14 // SPI Bus SCK (clock)
-#define D6 12 // SPI Bus MISO 
-#define D7 13 // SPI Bus MOSI
-#define D8 15 // SPI Bus SS (CS)
-#define D9 3 // RX0 (Serial console)
-#define D10 1 // TX0 (Serial console)
-
-
-const int PINs[3] = {D4, D2, D3};
-int brightness[3] = {0, 0, 0};
-
-int fadeAmount = 5;
-int currentLED = 0;
-bool indicator = false;
+const int redPin = 4;
+const int greenPin = 0;
+const int bluePin = 2;
 
 void setup() {
-  // Serial.begin(9600);
-  pinMode(PINs[0], OUTPUT);
-  pinMode(PINs[1], OUTPUT);
-  pinMode(PINs[2], OUTPUT);
-  indicator = false;
+  // Start off with the LED off.
+  setColourRgb(0,0,0);
+  Serial.begin(9600);
 }
 
 void loop() {
-  for (int i = 0; i < 3; i++) {
-    if (i != currentLED) {
-      brightness[i] = 0;
-    } else {
-      brightness[i] = brightness[i] + fadeAmount;
-    }
-    analogWrite(PINs[i], brightness[i]);
-  }
+  unsigned int rgbColour[3];
 
-  if (brightness[currentLED] == 0 && indicator) {
-      fadeAmount = -fadeAmount;
-      currentLED = currentLED + 1;
-      if (currentLED == 4) {
-        currentLED = 0;
-      }
+  rgbColour[0] = 255;
+  rgbColour[1] = 0;
+  rgbColour[2] = 0;  
+  
+  // Choose the colours to increment and decrement.
+  for (int decColour = 0; decColour < 3; decColour += 1) {
+    int incColour = decColour == 2 ? 0 : decColour + 1;
+
+    // cross-fade the two colours.
+    for(int i = 0; i < 255; i += 1) {
+      rgbColour[decColour] -= 1;
+      rgbColour[incColour] += 1;
+      
+      setColourRgb(rgbColour[0], rgbColour[1], rgbColour[2]);
+      delay(5);
+    }
   }
-  if (brightness[currentLED] == 255) {
-      fadeAmount = -fadeAmount;
-      indicator = true;
-  }
-  // wait for 30 milliseconds to see the dimming effect
-  delay(30);
 }
 
-
-
+void setColourRgb(unsigned int red, unsigned int green, unsigned int blue) {
+    analogWrite(redPin, red);
+    analogWrite(greenPin, green);
+    analogWrite(bluePin, blue);
+}

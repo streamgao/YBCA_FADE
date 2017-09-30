@@ -3,9 +3,9 @@ this file led effect:
 corss fade
 */
 
-const int redPin = 2;
+const int redPin = 4;
 const int greenPin = 0;
-const int bluePin = 4;
+const int bluePin = 2;
 
 void setup() {
   // Start off with the LED off.
