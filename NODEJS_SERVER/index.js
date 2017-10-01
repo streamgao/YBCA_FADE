@@ -4,7 +4,6 @@ var _ = require('lodash');
 var Q = require('q');
 var fs = require('fs');
 var split = require('split');
-// var parse = require('csv-parse');
 const csv = require('csvtojson')
 var Config = require('./config')
 var Controller = require('./controller');
@@ -24,7 +23,7 @@ controller.labelStreams.init()
 // controller.regularStreams.startRegular();
 // controller.regularStreams.stopRegular();
 
-var option={
+var option = {
     duration: 1000,
     sequential: true,
     sequential_delta: 40,
@@ -32,6 +31,6 @@ var option={
     randomize_range: 8095,
     drift: true,
     drift_delta:2,
-    msg: "0,255,0,1"
+    msg: "255,255,255,1,2"
 }
 controller.regularStreams.startRegular(option);

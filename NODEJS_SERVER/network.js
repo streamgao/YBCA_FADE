@@ -1,10 +1,6 @@
 var Config = require('./config')
 
-// var PORT = 12346;
-// var HOST = '127.0.0.1';
 var REMOTEPORT = 12345;
-// var HOST = '192.168.0.101';
-
 var LOCALHOST = '192.168.0.101';
 var LOCALPORT = 12346;
 
@@ -41,9 +37,7 @@ var startServer=function(deviceHeartBeatFunc){
                     var id = msgType.split('#')[0].split(':')[1]
                     Config.MonitHeart && controller.tick(id)
                 }
-    //         console.log(remote.address + ':' + remote.port +' - ' + message);
         }
-    //     console.log(remote.address + ':' + remote.port +' - ' + message);
     });
 
     server.bind(LOCALPORT, LOCALHOST);

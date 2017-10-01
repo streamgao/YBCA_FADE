@@ -40,6 +40,7 @@ const int MODE_BLINK = 1;
 const int MODE_FADE = 2;
 int MODE = MODE_BLINK;
 int brightness = 0;
+int fadeAmount = 5;
 
 int status = WL_IDLE_STATUS;
 const char* ssid = "kineviz_test";  //  your network SSID (name)
@@ -167,7 +168,7 @@ void loop() {
     }
   } // end if
 
-  if (curMode == MODE_FADE) {
+  if (MODE == MODE_FADE) {
       // fade
       brightness += fadeAmount;
       analogWrite(PIN_R, brightness);
@@ -180,6 +181,7 @@ void loop() {
       // whole loop is 1.00 second .  -- i just want a round number
       delay(20);
   } else {
+      // reset
       brightness = 0;
       fadeAmount = 5;
   }

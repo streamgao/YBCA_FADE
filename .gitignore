@@ -3,3 +3,4 @@
 data/
 video/*
 *node_modules*
+*log.txt
