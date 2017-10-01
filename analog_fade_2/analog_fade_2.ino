@@ -9,18 +9,16 @@ fade white
 #define D3 0
 #define D4 2 // Same as "LED_BUILTIN", but inverted logic
 #define D5 14 // SPI Bus SCK (clock)
-#define D6 12 // SPI Bus MISO 
+#define D6 12 // SPI Bus MISO
 #define D7 13 // SPI Bus MOSI
 #define D8 15 // SPI Bus SS (CS)
 #define D9 3 // RX0 (Serial console)
 #define D10 1 // TX0 (Serial console)
 
-
 const int PINs[3] = {D2, D3, D4};
 int brightness[3] = {0, 0, 0};
 
 int fadeAmount = 5;
-int currentLED = 0;
 
 void setup() {
   // Serial.begin(9600);
@@ -35,12 +33,10 @@ void loop() {
       analogWrite(PINs[i], brightness[i]);
   }
 
-  if (brightness[currentLED] == 0 || brightness[currentLED] == 255) {
+  if (brightness[0] == 0 || brightness[0] == 250) {
       fadeAmount = -fadeAmount;
   }
-  // wait for 30 milliseconds to see the dimming effect
-  delay(30);
+  // wait for 20 milliseconds to see the dimming effect
+  // whole loop is 1.00 second .  -- i just want a round number
+  delay(20);
 }
-
-
-

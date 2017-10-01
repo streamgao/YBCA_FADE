@@ -10,9 +10,7 @@ var RegularStreams = require('./streams/regular_streams');
 var Devices = require('./devices');
 var Log = require('./Log');
 
-
 const Max_Devices = 30
-
 
 var getlogs=function(date){
     var deferred = Q.defer();

@@ -28,7 +28,7 @@
 
 
 // Select time function:
-//static inline unsigned long elapsed() { return micros(); }
+// static inline unsigned long elapsed() { return micros(); }
 static inline unsigned long elapsed() { return millis(); }
 
 
@@ -54,19 +54,14 @@ void SimpleTimer::run() {
     current_millis = elapsed();
 
     for (i = 0; i < MAX_TIMERS; i++) {
-
         toBeCalled[i] = DEFCALL_DONTRUN;
-
         // no callback == no timer, i.e. jump over empty slots
         if (callbacks[i]) {
-
             // is it time to process this timer ?
             // see http://arduino.cc/forum/index.php/topic,124048.msg932592.html#msg932592
-
             if (current_millis - prev_millis[i] >= delays[i]) {
-
                 // update time
-                //prev_millis[i] = current_millis;
+                // prev_millis[i] = current_millis;
                 prev_millis[i] += delays[i];
 
                 // check if the timer callback has to be executed
@@ -125,7 +120,6 @@ int SimpleTimer::findFirstFreeSlot() {
             return i;
         }
     }
-
     // no free slots found
     return -1;
 }

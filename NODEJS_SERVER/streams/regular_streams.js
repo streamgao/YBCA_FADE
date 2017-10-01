@@ -11,27 +11,25 @@ class RegularStream{
 		}
     renderRegular(option) {
         if(this.ip!==null){
-            if(option.sequential==false && option.randomize == false){
-                this.tick(false, option.msg)
-            }else if(option.sequential && option.randomize == false){
-                this.timeoutInsts.push(setTimeout(()=>{this.tick(true, option.msg)}, this.id*option.sequential_delta))
-            }else if(option.sequential==false && option.randomize){
-                this.timeoutInsts.push(setTimeout(()=>{this.tick(true, option.msg)}, Math.random()* option.randomize_range))
-            }else if(option.sequential && option.randomize){
-                this.timeoutInsts.push(setTimeout(()=>{this.tick(true, option.msg)}, this.id*option.sequential_delta + Math.random()* option.randomize_range))
+            if (option.sequential==false && option.randomize == false){
+                this.tick(false, option.msg);
+            } else if (option.sequential && option.randomize == false) {
+                this.timeoutInsts.push(setTimeout(()=>{this.tick(true, option.msg)}, this.id*option.sequential_delta));
+            } else if (option.sequential==false && option.randomize) {
+                this.timeoutInsts.push(setTimeout(()=>{this.tick(true, option.msg)}, Math.random()* option.randomize_range));
+            } else if (option.sequential && option.randomize) {
+                this.timeoutInsts.push(setTimeout(()=>{this.tick(true, option.msg)}, this.id*option.sequential_delta + Math.random()* option.randomize_range));
             }
         }
     }
-    tick(remove_from_timeoutInsts, msg){
-        if(remove_from_timeoutInsts) this.timeoutInsts.shift()
-        this.devices.render(this.id, msg)
-	}
-	stop(){
-	    this.timeoutInsts.forEach(inst=>{clearTimeout(inst)})
-      this.timeoutInsts.length = 0
-	}
-
-
+    tick(remove_from_timeoutInsts, msg) {
+        if (remove_from_timeoutInsts) this.timeoutInsts.shift();
+        this.devices.render(this.id, msg);
+		}
+		stop() {
+		    this.timeoutInsts.forEach(inst=>{clearTimeout(inst)})
+	      this.timeoutInsts.length = 0
+		}
 }
 
 class RegularStreams{
@@ -51,7 +49,8 @@ class RegularStreams{
             randomize_range: 400,
             drift: false,
             drift_delta: 10,
-            msg: "255,0,0,1" //rgbRelay
+						// r, g, b, relay, blinkmode
+            msg: "255,0,0,1" + ',' + BLINK //rgbRelay
         };
 		}
     startRegular(option) {
@@ -68,8 +67,8 @@ class RegularStreams{
         this.playingRegular = true;
         this.renderRegular();
     }
-    updateRegular(option){
-        if(option!==undefined){
+    updateRegular(option) {
+        if(option!==undefined) {
             this.regularOption.duration         = option.duration;
             this.regularOption.sequential       = option.sequential;
             this.regularOption.sequential_delta = option.sequential_delta;
