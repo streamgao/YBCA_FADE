@@ -1,7 +1,7 @@
 var Config = require('./config')
 
 var REMOTEPORT = 12345;
-var LOCALHOST = '192.168.0.101';
+var LOCALHOST = '192.168.0.94';
 var LOCALPORT = 12346;
 
 var Log = require('./Log');

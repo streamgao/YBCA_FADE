@@ -1,7 +1,5 @@
 "use strict"
 var _ = require('lodash');
-const BLINK = 0;
-const FADE = 1;
 
 class RegularStream{
 		constructor(idx, devices) {
@@ -50,7 +48,7 @@ class RegularStreams{
             drift: false,
             drift_delta: 10,
 						// r, g, b, relay, blinkmode
-            msg: "255,0,0,1" + ',' + BLINK //rgbRelay
+            msg: "255,0,0,1,1"
         };
 		}
     startRegular(option) {
