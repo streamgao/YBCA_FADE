@@ -39,7 +39,6 @@ class RegularStreams{
         		this.regularStreams.push(new RegularStream(idx, this.devices));
         });
         this.regularOption = {
-						blink_mode: BLINK,
             duration: 1000,
             sequential: false,
             sequential_delta: 10,
